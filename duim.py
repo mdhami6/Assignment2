@@ -58,14 +58,14 @@ def percent_to_graph(percent, total_chars):
 
 def call_du_sub(location):
     "use subprocess to call `du -d 1 + location`, rtrn raw list"
-    cmd = subprocess.Popen('du -d 1 ' + location, hell=True, stdout=subprocess.PIPE)
+    cmd = subprocess.Popen('du -d 1 ' + location, shell=True, stdout=subprocess.PIPE)
     take1 = []
     take1 = cmd.stdout.readlines()
     
-    take2 = str(hello1).split("\\n")
+    take2 = str(take1).split("\\n")
     sub = []
     for i in take2:
-        sub.append(i.decode())
+        sub.append(i)
     return sub
     
     return
