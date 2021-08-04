@@ -61,14 +61,10 @@ def call_du_sub(location):
     cmd = subprocess.Popen('du -d 1 ' + location, shell=True, stdout=subprocess.PIPE)
     take1 = []
     take1 = cmd.stdout.readlines()
-    
-    take2 = str(take1).split("\\n")
-    sub = []
-    for i in take2:
-        sub.append(i)
-    return sub
-    
-    return
+    take2 = []
+    for i in take1:
+        take2.append(i.decode('utf8', errors='strict').strip())
+    return take2
 
 def create_dir_dict(raw_dat):
     "get list from du_sub, return dict {'directory': 0} where 0 is size"
