@@ -79,7 +79,16 @@ if __name__ == "__main__":
     sub = call_du_sub(sys.argv[1])
     dit = create_dir_dict(sub)
     total_size = dit[sys.argv[1]]
+    total_size = total_size / 1000
+    #print(dit)
+    holder = []
+    val = []
+    p=0
     for value in dit:
-        percent = (int(value) / int(total_size)) * 100
-        print(percent_to_graph(percent, int(total_size))
-    
+        holder.append(dit[value])
+        val.append(value)
+    for i in holder:
+        percent = ((int(i) / 1000) / int(total_size)) * 100
+        print(val[p] + " " + percent_to_graph(percent ,int(total_size)))
+        p = p + 1
+
