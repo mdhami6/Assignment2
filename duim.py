@@ -18,23 +18,20 @@ with anyone or anything except for submission for grading.
 I understand that the Academic Honesty Policy will be enforced and 
 violators will be reported and appropriate action will be taken.
 
-Description: <Enter your documentation here>
+Description: Returns all directory along with the size in a bar graph.
 
 Date: July 26th 2021
 '''
 
 def parse_command_args():
-    "Set up argparse here. Call this function inside main."
+    #"Set up argparse here. Call this function inside main."
     parser = argparse.ArgumentParser(description="DU Improved -- See Disk Usage Report with bar charts",epilog="Copyright 2021")
     parser.add_argument("-l", "--length", type=int, default=20, help="Specify the length of the graph. Default is 20.")
-    # add argument for "human-readable". USE -H, don't use -h! -h is reserved for --help which is created automatically.
-    # check the docs for an argparse option to store this as a boolean.
-    # add argument for "target". set number of args to 1.
     args = parser.parse_args()
 
 
 def percent_to_graph(percent, total_chars):
-    "returns a string: eg. '##  ' for 50 if total_chars == 4"
+   # "returns a string: eg. '##  ' for 50 if total_chars == 4"
     graph = percent/100
     graph = graph * total_chars
     graph = round(graph)
@@ -57,7 +54,7 @@ def percent_to_graph(percent, total_chars):
     return finish
 
 def call_du_sub(location):
-    "use subprocess to call `du -d 1 + location`, rtrn raw list"
+    #"use subprocess to call `du -d 1 + location`, rtrn raw list"
     cmd = subprocess.Popen('du -d 1 ' + location, shell=True, stdout=subprocess.PIPE)
     take1 = []
     take1 = cmd.stdout.readlines()
@@ -67,7 +64,7 @@ def call_du_sub(location):
     return take2
 
 def create_dir_dict(raw_dat):
-    "get list from du_sub, return dict {'directory': 0} where 0 is size"
+   # "get list from du_sub, return dict {'directory': 0} where 0 is size"
     fol = {}
     for x in raw_dat:
         d = x.split("\t")
@@ -78,4 +75,11 @@ def create_dir_dict(raw_dat):
 
 
 if __name__ == "__main__":
-    pass
+    #take input from user and get directory size
+    sub = call_du_sub(sys.argv[1])
+    dit = create_dir_dict(sub)
+    total_size = dit[sys.argv[1]]
+    for value in dit:
+        percent = (int(value) / int(total_size)) * 100
+        print(percent_to_graph(percent, int(total_size))
+    
